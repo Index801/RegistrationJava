@@ -66,8 +66,7 @@ public class Registration extends HttpServlet {
 //		for (Map.Entry<Integer, String> entry : useremail.entrySet()) {
 //			 request.setAttribute(entry.getKey(), entry.getValue());
 //			 System.out.println(entry.getValue());
-//		}
-		    
+//		}  
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 	
