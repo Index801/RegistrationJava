@@ -7,10 +7,9 @@
  <link rel="stylesheet" href="stylesheet/bootstrap.min.css">
  <script src="js/jquery-1.9.1.js"></script>
  <script src="js/jquery.validate.min.js"></script>
- <script src="js/inputmask.js"></script>
  <script src="js/common.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Registration</title>
 </head>
 <body>
 ${error}
