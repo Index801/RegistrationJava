@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 
+
 public class Db {
 	static Connection dbConnection = null;
 	static Statement Statement = null;
@@ -144,6 +145,64 @@ public class Db {
 	    }
 	    return userList;
 	}
+	
+public static User getUser(Integer user_id) throws SQLException {
+	
+		List<User> userList = new ArrayList<>();
+		User user = new User();
+	    String sql = "SELECT * FROM `users` WHERE user_id = ?";
+	    try {
+	        dbConnection = getDBConnection();
+	        preparedStatement = dbConnection.prepareStatement(sql);
+	        preparedStatement.setInt(1, user_id);
+	        result = preparedStatement.executeQuery();
+	        while(result.next())
+	        {        	
+	        	user = SetUsers(result);
+//	        	userList.add(user);
+	        }
+	        
+	    } catch (SQLException e) {
+	        System.out.println(e.getMessage());
+	    } finally {
+	        if (Statement != null) {
+	        	Statement.close();
+	        }
+	        if (dbConnection != null) {
+	            dbConnection.close();
+	        }
+	    }
+	    return user;
+	}
+	
+	public void updateUser(int user_id, User user) throws SQLException {
+		Connection connection = null;
+		try {
+			 dbConnection = getDBConnection();
+		    PreparedStatement preparedStatement = dbConnection.prepareStatement("UPDATE users  SET firstnameua = ?,surnameua = ?,patronymicua = ?,firstnamelatin = ?,surnamelatin = ?,patronymiclatin = ?,"
+		    	    + "password = ? ,phone = ?,user_group_id=?,status = ? WHERE user_id = ?");
+		    int i = 1;
+		    preparedStatement.setString(i++, user.getFirstnameua());
+		    preparedStatement.setString(i++, user.getSurnameua());
+		    preparedStatement.setString(i++, user.getPatronymicua());
+		    preparedStatement.setString(i++, user.getFirstnamelatin());
+		    preparedStatement.setString(i++, user.getSurnamelatin());
+		    preparedStatement.setString(i++, user.getPatronymiclatin());
+//		    preparedStatement.setString(i++, user.getEmail());
+		    preparedStatement.setString(i++, user.getPassword());
+		    preparedStatement.setString(i++, user.getPhone());
+		    preparedStatement.setInt(i++, user.getUser_group_id());
+		    preparedStatement.setBoolean(i++, user.isStatus());
+		    
+		    preparedStatement.setInt(i++, user_id);
+		    preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+//			dbConnection.commit();
+			dbConnection.close();
+		}
+	    }
 	 private static User SetUsers(ResultSet result) throws SQLException {
 			User user = new User();
 			user.setUser_id(result.getInt("user_id"));
