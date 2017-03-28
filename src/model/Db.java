@@ -180,7 +180,7 @@ public static User getUser(Integer user_id) throws SQLException {
 		try {
 			 dbConnection = getDBConnection();
 		    PreparedStatement preparedStatement = dbConnection.prepareStatement("UPDATE users  SET firstnameua = ?,surnameua = ?,patronymicua = ?,firstnamelatin = ?,surnamelatin = ?,patronymiclatin = ?,"
-		    	    + "password = ? ,phone = ?,user_group_id=?,status = ? WHERE user_id = ?");
+		    	    + "password = ? ,phone = ?,user_group_id=?,status = ?, reason = ? WHERE user_id = ?");
 		    int i = 1;
 		    preparedStatement.setString(i++, user.getFirstnameua());
 		    preparedStatement.setString(i++, user.getSurnameua());
@@ -193,6 +193,7 @@ public static User getUser(Integer user_id) throws SQLException {
 		    preparedStatement.setString(i++, user.getPhone());
 		    preparedStatement.setInt(i++, user.getUser_group_id());
 		    preparedStatement.setBoolean(i++, user.isStatus());
+		    preparedStatement.setString(i++, user.getReason());
 		    
 		    preparedStatement.setInt(i++, user_id);
 		    preparedStatement.executeUpdate();
@@ -217,6 +218,7 @@ public static User getUser(Integer user_id) throws SQLException {
 			user.setPhone(result.getString("phone"));
 			user.setStatus(result.getBoolean("status"));
 			user.setUser_group_id(result.getInt("user_group_id"));
+			user.setReason(result.getString("reason"));
 			return user;
 		    }
 }

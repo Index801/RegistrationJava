@@ -12,6 +12,7 @@ public class User {
     private String password;
     private String phone;
     private Integer user_group_id;
+    private String reason;
     private boolean status;
  
     
@@ -22,7 +23,7 @@ public class User {
     
 
     public User(String firstnameua, String surnameua, String patronymicua,String firstnamelatin, String surnamelatin, String patronymiclatin, String email, String password,
-	  String phone, Integer user_group_id, boolean status) {
+	  String phone, Integer user_group_id, boolean status, String reason) {
 	this.firstnameua = firstnameua;
 	this.surnameua = surnameua;
 	this.patronymicua = patronymicua;
@@ -34,6 +35,7 @@ public class User {
 	this.phone = phone;
 	this.user_group_id = user_group_id;
 	this.status = status;
+	this.reason = reason;
     }
     
 
@@ -141,6 +143,14 @@ public class User {
 	public void setUser_group_id(Integer user_group_id) {
 		this.user_group_id = user_group_id;
 	}
+	
+	public String getReason() {
+		return reason;
+	    }
+
+    public void setReason(String reason) {
+	this.reason = reason;
+    }
 
 
 	@Override
@@ -150,7 +160,7 @@ public class User {
 		+ ", patronymiclatin=" + patronymiclatin
 		+ ", user_group_id=" + user_group_id
 		+ ", email=" + email + ", password=" + password +  ", phone="
-		+ phone + ", status=" + status + "]";
+		+ phone + ", status=" + status +", reason=" + reason +"]";
     }
 
     

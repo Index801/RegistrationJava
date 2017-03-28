@@ -38,6 +38,7 @@ public class EditUser extends HttpServlet {
 		request.setAttribute("password", user.getPassword());
 		request.setAttribute("user_group_id", user.getUser_group_id());
 		request.setAttribute("status", user.isStatus());
+		request.setAttribute("reason", user.getReason());
 		request.getRequestDispatcher("edituser.jsp").forward(request, response);
 	}
 
@@ -60,14 +61,21 @@ public class EditUser extends HttpServlet {
 		user.setEmail(request.getParameter("email"));
 		user.setPhone(request.getParameter("phone"));
 		user.setUser_group_id(user_group_id);
-		user.setStatus(true);
+		
+		if(Integer.parseInt(request.getParameter("status")) == 1) {
+			user.setStatus(true);
+			user.setReason("");
+		} else {		
+			user.setStatus(false);
+			user.setReason(request.getParameter("reason"));		
+		}
 		try {
 			db.updateUser(user_id, user);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	    
-	    request.getRequestDispatcher("User.jsp").forward(request, response);
+		 response.sendRedirect("User");
+//	    request.getRequestDispatcher("User.jsp").forward(request, response);
 	   
 	   
 	}

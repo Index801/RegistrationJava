@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mysql.fabric.Response;
+
 import model.Db;
 import model.User;
 
@@ -22,7 +24,8 @@ public class UserList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	Db db = new Db();
 	List<User> users = new ArrayList();
-	Object user = new ArrayList();
+	User user = new User();
+//	Object user = new ArrayList();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -36,6 +39,21 @@ public class UserList extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		Integer user_id = Integer.parseInt(request.getParameter("user_id"));
+		
+		try {
+			user = db.getUser(user_id);
+			if(Integer.parseInt(request.getParameter("status")) == 1) {
+				user.setStatus(false);
+			} else {
+				user.setStatus(true);
+			}
+			db.updateUser(user_id, user);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		request.getRequestDispatcher("User.jsp").forward(request, response);
 	}
 	
