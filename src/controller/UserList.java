@@ -39,17 +39,23 @@ public class UserList extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		Integer user_id = Integer.parseInt(request.getParameter("user_id"));
+		Integer remove = Integer.parseInt(request.getParameter("remove"));
+		System.out.println(request.getParameter("user_id"));
 		
 		try {
-			user = db.getUser(user_id);
-			if(Integer.parseInt(request.getParameter("status")) == 1) {
-				user.setStatus(false);
+			if(remove == 1) {
+				db.removeUser(user_id);
 			} else {
-				user.setStatus(true);
+				user = db.getUser(user_id);
+				if(Integer.parseInt(request.getParameter("status")) == 1) {
+					user.setStatus(false);
+				} else {
+					user.setStatus(true);
+				}
+				db.updateUser(user_id, user);
 			}
-			db.updateUser(user_id, user);
 
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -159,7 +159,6 @@ public static User getUser(Integer user_id) throws SQLException {
 	        while(result.next())
 	        {        	
 	        	user = SetUsers(result);
-//	        	userList.add(user);
 	        }
 	        
 	    } catch (SQLException e) {
@@ -203,7 +202,26 @@ public static User getUser(Integer user_id) throws SQLException {
 //			dbConnection.commit();
 			dbConnection.close();
 		}
+	  }
+	public void removeUser(int user_id) throws SQLException {
+		
+		String sql = "DELETE  FROM `users` WHERE user_id = ?";
+	    try {
+	        dbConnection = getDBConnection();
+	        preparedStatement = dbConnection.prepareStatement(sql);
+	        preparedStatement.setInt(1, user_id);
+	        preparedStatement.executeUpdate();
+	    } catch (SQLException e) {
+	        System.out.println(e.getMessage());
+	    } finally {
+	        if (Statement != null) {
+	        	Statement.close();
+	        }
+	        if (dbConnection != null) {
+	            dbConnection.close();
+	        }
 	    }
+	}
 	 private static User SetUsers(ResultSet result) throws SQLException {
 			User user = new User();
 			user.setUser_id(result.getInt("user_id"));

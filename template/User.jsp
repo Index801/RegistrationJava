@@ -84,17 +84,19 @@
 			        <th>surnameua</th>
 			        <th>patronymicua</th>
 			        <th>email</th>
-			        <th></th>     
+			        <th></th>  
+			        <th></th>
 			      </tr>
 			    </thead>
 			    <tbody>
 			    <c:forEach items="${users}" var="user">
-			      <tr>
+			      <tr class="${user.user_id}">
 			       	<td><input type="checkbox" name="status" value="${user.status ? "1" : "0"}" ${user.status ? "checked" : ""} data-id="${user.user_id}"/></td>
 			        <td>${user.firstnameua}</td>
 			        <td>${user.surnameua}</td>
 			        <td>${user.patronymicua}</td>
 			        <td>${user.email}</td>
+			        <td><a href="#" onclick="remove(${user.user_id})">Remove</a></td>
 			        <td><a href="EditUser?&id=${user.user_id}">Edit</a></td>
 			       
 			      </tr>
@@ -122,8 +124,19 @@
 			}
 		});
 		
-		
 	});
+	function remove(user_id) {
+		$('.'+user_id).css('display', 'none');
+		$.ajax({
+			url: 'User',
+			type: 'post',
+			data: 'user_id='+user_id+'&remove=1',
+			dataType: 'json',
+			success: function() {
+				
+			}
+		});
+	}
 </script>
 </body>
 </html>
