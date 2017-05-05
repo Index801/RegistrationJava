@@ -69,8 +69,9 @@
 					<label class="control-label col-xs-3">Department:</label>
 					<div class="col-xs-9">
 						<select name="department" class="form-control">
-							<option value="1">Department1</option>
-							<option value="2">Department2</option>
+							 <c:forEach items="${departments}" var="department">
+					          	<option value="${department.id}">${department.name}</option>
+					          </c:forEach>
 						</select>
 					</div>
 				</div>
@@ -79,7 +80,7 @@
 					<div class="col-xs-9">
 						<select name="status" class="form-control">
 							<option value="0">Выключен</option>
-							<option value="1" <c:if test="${user.status}">selected</c:if>>Включен</option>
+							<option value="1" ${status ? "selected" : ""}>Включен</option>
 						</select>
 					</div>
 				</div>

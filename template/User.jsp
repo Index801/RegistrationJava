@@ -1,137 +1,191 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
- <link rel="stylesheet" href="stylesheet/bootstrap.min.css">
-  <link rel="stylesheet" href="stylesheet/userlist.css">
- <script src="js/jquery-1.9.1.js"></script>
- <script src="js/bootstrap.js"></script>
- 
-<title>User-List</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Admin</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.7 -->
+  <link rel="stylesheet" href="js/bootstrap/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="js/dist/css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="js/dist/css/skins/_all-skins.min.css">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
 </head>
-<body>
-	<div class="row affix-row">
-		<div class="col-sm-3 col-md-2 affix-sidebar">
-				<div class="sidebar-nav">
-		  <div class="navbar navbar-default" role="navigation">
-		    <div class="navbar-header">
-		      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
-		      <span class="sr-only">Toggle navigation</span>
-		      <span class="icon-bar"></span>
-		      <span class="icon-bar"></span>
-		      <span class="icon-bar"></span>
-		      </button>
-		      <span class="visible-xs navbar-brand">Sidebar menu</span>
-		    </div>
-		    <div class="navbar-collapse collapse sidebar-navbar-collapse">
-		      <ul class="nav navbar-nav" id="sidenav01">
-		        <li class="active">
-		          <a href="#" data-toggle="collapse" data-target="#toggleDemo0" data-parent="#sidenav01" class="collapsed">
-		          <h4>
-		          Control Panel
-		          <br>
-		          <small>IOSDSV <span class="caret"></span></small>
-		          </h4>
-		          </a>
-		          <div class="collapse" id="toggleDemo0" style="height: 0px;">
-		            <ul class="nav nav-list">
-		              <li><a href="#">ProfileSubMenu1</a></li>
-		              <li><a href="#">ProfileSubMenu2</a></li>
-		              <li><a href="#">ProfileSubMenu3</a></li>
-		            </ul>
-		          </div>
-		        </li>
-		        <li>
-		          <a href="#" data-toggle="collapse" data-target="#toggleDemo" data-parent="#sidenav01" class="collapsed">
-		          <span class="glyphicon glyphicon-cloud"></span> Submenu 1 <span class="caret pull-right"></span>
-		          </a>
-		          <div class="collapse" id="toggleDemo" style="height: 0px;">
-		            <ul class="nav nav-list">
-		              <li><a href="#">Submenu1.1</a></li>
-		              <li><a href="#">Submenu1.2</a></li>
-		              <li><a href="#">Submenu1.3</a></li>
-		            </ul>
-		          </div>
-		        </li>
-		        <li class="active">
-		          <a href="#" data-toggle="collapse" data-target="#toggleDemo2" data-parent="#sidenav01" class="collapsed">
-		          <span class="glyphicon glyphicon-inbox"></span> Submenu 2 <span class="caret pull-right"></span>
-		          </a>
-		          <div class="collapse" id="toggleDemo2" style="height: 0px;">
-		            <ul class="nav nav-list">
-		              <li><a href="#">Submenu2.1</a></li>
-		              <li><a href="#">Submenu2.2</a></li>
-		              <li><a href="#">Submenu2.3</a></li>
-		            </ul>
-		          </div>
-		        </li>
-		        <li><a href=""><span class="glyphicon glyphicon-cog"></span> PreferencesMenu</a></li>
-		      </ul>
-		      </div><!--/.nav-collapse -->
-		    </div>
-		  </div>
-		</div>
-		<div class="col-sm-9 col-md-10 affix-content">
-			<div class="container-fluid">
-	  		<table class="table table-condensed">
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+  <header class="main-header">
+    <!-- Logo -->
+    <a href="User" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>Admin</b></span>	
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>Admin</b></span>
+    </a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top">      
+    </nav>
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <!-- search form -->
+      <form action="UserSearch" method="post" class="sidebar-form">
+        <div class="input-group">
+          <input type="text" name="search" class="form-control" placeholder="Search by email...">
+              <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                </button>
+              </span>
+        </div>
+      </form>
+      <ul class="sidebar-menu">
+        <li class="treeview active">
+          <a href="#">
+            <i class="fa fa-book"></i> <span>Department</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu menu-open" style="display: block;">
+          <c:forEach items="${departments}" var="department">
+          	<li><a href="DepartmentSearch?id=${department.id}"><i class="fa fa-circle-o"></i>${department.name}</a></li>
+           </c:forEach>
+            
+          </ul>
+        </li>
+      </ul>
+      
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+
+    <!-- Main content -->
+    <section class="content">
+		<table class="table table-condensed">
 			  <thead>
 			      <tr>
-			      	<th>status</th>
+			      	<th></th>
 			        <th>firstnameua</th>
 			        <th>surnameua</th>
 			        <th>patronymicua</th>
 			        <th>email</th>
-			        <th></th>  
-			        <th></th>
+			        <th><input type="button" value="Disable" class="disable btn btn-info btn-xs"></th>  
+			        <th><input type="button" value="remove" class="remove btn btn-danger btn-xs"></th>
 			      </tr>
 			    </thead>
 			    <tbody>
+			    <form method="post" action="#" id="form">
 			    <c:forEach items="${users}" var="user">
 			      <tr class="${user.user_id}">
-			       	<td><input type="checkbox" name="status" value="${user.status ? "1" : "0"}" ${user.status ? "checked" : ""} data-id="${user.user_id}"/></td>
+			       	<td><input type="checkbox" name="user_check"  ${user.status ? "checked" : ""} value="${user.user_id}"/></td>
 			        <td>${user.firstnameua}</td>
 			        <td>${user.surnameua}</td>
 			        <td>${user.patronymicua}</td>
 			        <td>${user.email}</td>
-			        <td><a href="#" onclick="remove(${user.user_id})">Remove</a></td>
-			        <td><a href="EditUser?&id=${user.user_id}">Edit</a></td>
-			       
+			        <td><a href="EditUser?&id=${user.user_id}"><i class="fa fa-edit"></i></a></td>
+			        <td><a href="#" onclick="remove(${user.user_id})"><i class="fa fa-fw fa-remove"></i></a></td>        
 			      </tr>
-			      </c:forEach>
+			     </c:forEach>
+			    </form>
 			    </tbody>
 			</table>
-			</div>
-	  </div>
+    </section>
+    <!-- /.content -->
   </div>
+  <!-- /.content-wrapper -->
+
+  <footer class="main-footer">
+
+  </footer>
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Create the tabs -->
+    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+      <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+   </ul>
+  </aside>
+  <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 2.2.3 -->
+<script src="js/jQuery/jquery-2.2.3.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="js/bootstrap/js/bootstrap.min.js"></script>
+<!-- Slimscroll -->
+<script src="js/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="js/fastclick/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="js/dist/js/app.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="js/dist/js/demo.js"></script>
 <script>
 	$(function () {
-		$("[name='status']").on('click', function() {
+		$(".disable").on('click', function() {
+	
 			$.ajax({
-				url: 'User',
+				url: 'DisableUser',
 				type: 'post',
-				data: 'user_id='+$(this).data('id')+'&status='+$(this).val(),
+				data: $("#form").serialize(),
 				dataType: 'json',
 				success: function() {
 				}
 			});
-			if($(this).val() == '1') {
-				$(this).val('0');
-			} else {
-				$(this).val('1');
-			}
 		});
 		
+		$(".remove").on('click', function() {
+			
+			$.ajax({
+				url: 'DeleteUser',
+				type: 'post',
+				data: $("#form").serialize(),
+				dataType: 'json',
+				complete: function() {
+					location.reload();
+				},
+				success: function(result) {
+					
+				}
+			});
+		});	
 	});
 	function remove(user_id) {
 		$('.'+user_id).css('display', 'none');
 		$.ajax({
-			url: 'User',
-			type: 'post',
-			data: 'user_id='+user_id+'&remove=1',
+			url: 'DeleteUser',
+			type: 'get',
+			data: 'user_id='+user_id,
 			dataType: 'json',
+			complete: function() {
+				location.reload();
+			},
 			success: function() {
 				
 			}
