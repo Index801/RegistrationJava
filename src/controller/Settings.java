@@ -11,20 +11,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import main.entity.Department;
 import model.DbDepartment;
-import model.DbUser;
-import main.entity.*;
 
-@WebServlet("/User")
-public class UserList extends HttpServlet {
+@WebServlet("/Settings")
+public class Settings extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	DbUser db = new DbUser();
+
 	DbDepartment dep = new DbDepartment();
 	private List<Department> departments = new ArrayList<>();
-	private List<User> users = new ArrayList();
-	private User user;
-	
-	
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -32,34 +27,18 @@ public class UserList extends HttpServlet {
 		try {
 			departments.clear();
 			departments = dep.getDepartments();
-			request.setAttribute("departments", departments);
-			users.clear();
-			users = db.getUsers();
-			request.setAttribute("users", users);
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		request.getRequestDispatcher("User.jsp").forward(request, response);
+		request.setAttribute("departments", departments);
+		request.getRequestDispatcher("settings.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Integer user_id = Integer.parseInt(request.getParameter("user_id"));		
-
-		try {
-			user = db.getUser(user_id);
-			if (Integer.parseInt(request.getParameter("status")) == 1) {
-				user.setStatus(false);
-			} else {
-				user.setStatus(true);
-			}
-			db.updateUser(user_id, user);
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		request.getRequestDispatcher("User.jsp").forward(request, response);
+		doGet(request, response);
 	}
 
 }

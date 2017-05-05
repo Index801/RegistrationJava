@@ -30,6 +30,8 @@ public class DbUser {
 	private static String removeuser = "DELETE  FROM `users` WHERE user_id = ?";
 	private static String search = "SELECT * FROM `users` WHERE email LIKE ?";
 	private static String depsearch = "SELECT * FROM `users` WHERE user_group_id = ?";
+	private static String disableuser = "UPDATE users  SET status = ?";
+	private static String removeusercron = "DELETE  FROM `users` WHERE status = ?";
 
 	public  void addUser(Map<String, String> userdata) throws SQLException {
 		this.dbConnection = db.getDBConnection();
@@ -267,6 +269,42 @@ public class DbUser {
 		user.setReason(result.getString("reason"));
 		return user;
 
+	}
+	
+	public void DisableUser() throws SQLException {
+		this.dbConnection = db.getDBConnection();
+		try {
+
+			PreparedStatement preparedStatement = dbConnection.prepareStatement(disableuser);
+			int i = 1;
+
+			preparedStatement.setInt(i++, 0);
+	
+			preparedStatement.executeUpdate();
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			dbConnection.close();
+		}
+	}
+	
+	public void RemoveUser() throws SQLException {
+		this.dbConnection = db.getDBConnection();
+		try {
+			preparedStatement = dbConnection.prepareStatement(removeusercron);
+			preparedStatement.setInt(1, 0);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if (Statement != null) {
+				Statement.close();
+			}
+			if (dbConnection != null) {
+				dbConnection.close();
+			}
+		}
 	}
 
 }

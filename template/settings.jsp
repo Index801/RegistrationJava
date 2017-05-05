@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -88,93 +87,56 @@
 			<!-- Main content -->
 			<section class="content">
 				<divclass"row">
-					<div class="col-md-12">
-			<form action="EditUser" method="POST" class="form-horizontal" id="update-form">
-				<div class="form-group">
-					<label class="control-label col-xs-3">Имя:</label>
-					<div class="col-xs-9">
-						<input type="text" class="form-control translit" name="firstname" value="${firstname}">
-						<input type="hidden" name="user_id" value="${user_id}">
+				<div class="col-md-6">
+					<div class="box box-info">
+						<div class="box-header with-border">
+							<h3 class="box-title">Remove User</h3>
+						</div>
+						<!-- /.box-header -->
+						<!-- form start -->
+						<form class="form-horizontal" method="get" action="#">
+							<div class="box-body">
+								<div class="form-group">
+									<label for="inputEmail3" class="col-sm-2 control-label">Time</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" id="remove"
+											name="remove" placeholder="0 0 12 1 1/1 ? *">
+									</div>
+								</div>
+							</div>
+							<!-- /.box-body -->
+							<div class="box-footer">
+								<button type="submit" class="btn btn-info pull-right remove">Submit</button>
+							</div>
+							<!-- /.box-footer -->
+						</form>
 					</div>
 				</div>
-				<div class="form-group">
-					<label class="control-label col-xs-3">Фамлия:</label>
-					<div class="col-xs-9">
-						<input type="text" class="form-control translit" name="surname" value="${surname}">
+				<div class="col-md-6">
+					<div class="box box-info">
+						<div class="box-header with-border">
+							<h3 class="box-title">Disable User</h3>
+						</div>
+						<!-- /.box-header -->
+						<!-- form start -->
+						<form class="form-horizontal" method="get" action="#">
+							<div class="box-body">
+								<div class="form-group">
+									<label for="inputEmail3" class="col-sm-2 control-label">Time</label>
+									<div class="col-sm-10">
+										<input type="text" name="disable" class="form-control"
+											id="disable" placeholder="0 0 12 1 1/1 ? *">
+									</div>
+								</div>
+							</div>
+							<!-- /.box-body -->
+							<div class="box-footer">
+								<button type="submit" class="btn btn-info pull-right disable">Submit</button>
+							</div>
+							<!-- /.box-footer -->
+						</form>
 					</div>
 				</div>
-				<div class="form-group">
-					<label class="control-label col-xs-3">Отчество:</label>
-					<div class="col-xs-9">
-						<input type="text" class="form-control translit" name="patronymic" value="${patronymic}">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-xs-3">ИмяLatin:</label>
-					<div class="col-xs-9">
-						<input type="text" class="form-control" name="firstnamelatin" value="${firstnamelatin}">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-xs-3">ФамлияLatin:</label>
-					<div class="col-xs-9">
-						<input type="text" class="form-control" name="surnamelatin" value="${surnamelatin}">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-xs-3">ОтчествоLatin:</label>
-					<div class="col-xs-9">
-						<input type="text" class="form-control" name="patronymiclatin" value="${patronymiclatin}">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-xs-3">Password:</label>
-					<div class="col-xs-9">
-						<input type="password" class="form-control" name="password" value="${password}">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-xs-3">Telephone:</label>
-					<div class="col-xs-9">
-						<input type="text" class="form-control" name="phone" value="${phone}">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-xs-3">Department:</label>
-					<div class="col-xs-9">
-						<select name="department" class="form-control">
-							 <c:forEach items="${departments}" var="department">
-					          	<option value="${department.id}">${department.name}</option>
-					          </c:forEach>
-						</select>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-xs-3">Status:</label>
-					<div class="col-xs-9">
-						<select name="status" class="form-control">
-							<option value="0">Выключен</option>
-							<option value="1" ${status ? "selected" : ""}>Включен</option>
-						</select>
-					</div>
-				</div>
-				<div class="form-group reason">
-					<label class="control-label col-xs-3">Причина:</label>
-					<div class="col-xs-9">
-						<select name="reason" class="form-control">
-							<option value="Причина2">Причина2</option>
-							<option value="Причина1" <c:if test="${user.reason eq Причина1}">selected</c:if>>Причина1</option>
-						</select>
-					</div>
-				</div>
-				<div class="form-group">
-			    	<div class="col-xs-offset-3 col-xs-9">
-			     		<input type="submit" class="btn btn-primary edit" value="Сохранить">
-			     	</div>
-			     </div>
-			</form>
-		</div>
-			
 		</div>
 		</section>
 		<!-- /.content -->
@@ -213,32 +175,38 @@
 	<script src="js/dist/js/demo.js"></script>
 	<script>
 		$(function() {
-			$(".edit").on('click', function() {
-				$.ajax({
-					url : 'EditUser',
-					type : 'post',
-					data : $("#update-form").serialize(),
-					dataType : 'json',
-					success : function(json) {
-						console.log(json);
-					}
-				});
+			$(".disable").on("click", function() {
+				$(".remove").on('click', function() {
+					
+					$.ajax({
+						url: 'DisableUser',
+						type: 'post',
+						data: $("#disable").serialize(),
+						dataType: 'json',
+						complete: function() {
+							location.reload();
+						},
+						success: function(result) {
+							
+						}
+					});
 			});
-		});
-		$(document).ready(function() {
-			if ($("[name='status']").val() == '0') {
-				$('.reason').css('display', 'block');
-			} else {
-				$('.reason').css('display', 'none');
-			}
-		});
-		$(function() {
-			$("[name='status']").on('change', function() {
-				if ($(this).val() == '0') {
-					$('.reason').css('display', 'block');
-				} else {
-					$('.reason').css('display', 'none');
-				}
+			
+			$(".remove").on("click", function() {
+				$(".remove").on('click', function() {
+					
+					$.ajax({
+						url: 'DisableUserCron',
+						type: 'post',
+						data: $("#remove").serialize(),
+						dataType: 'json',
+						complete: function() {
+							location.reload();
+						},
+						success: function(result) {
+							
+						}
+					});
 			});
 		});
 	</script>

@@ -20,13 +20,15 @@ public class EditUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	DbUser db = new DbUser();
 	User user = new User();
+	Integer user_id;
 	DbDepartment dep = new DbDepartment();
 	private List<Department> departments = new ArrayList<>();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String idparam = request.getParameter("id");
-		Integer user_id = Integer.parseInt(idparam);
+		System.out.println(idparam);
+		this.user_id = Integer.parseInt(idparam);
 		try {
 			departments.clear();
 			departments = dep.getDepartments();
@@ -55,8 +57,7 @@ public class EditUser extends HttpServlet {
 			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
-		String idparam = request.getParameter("user_id");
-		Integer user_id = Integer.parseInt(idparam);
+
 		String department = request.getParameter("department");
 		Integer user_group_id = Integer.parseInt(department);
 
@@ -79,10 +80,10 @@ public class EditUser extends HttpServlet {
 			user.setReason(request.getParameter("reason"));
 		}
 		try {
-			db.updateUser(user_id, user);
+			db.updateUser(this.user_id, user);
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
+		}departments.clear();
 		response.sendRedirect("User");
 
 	}
